@@ -51,7 +51,6 @@ public class BookAdapter extends ArrayAdapter<BookDetails> {
 
         TextView snippetTextView = (TextView) listItemView.findViewById(R.id.result_snippet_textview);
         snippetTextView.setText(Html.fromHtml(currentBook.getmSnippet()));
-       // snippetTextView.setText(currentBook.getmSnippet());
 
         //Here returning the view with correct information on it:
         return listItemView;

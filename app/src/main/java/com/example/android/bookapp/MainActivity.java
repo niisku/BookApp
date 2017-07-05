@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         final NetworkInfo networkInfo = (NetworkInfo) connManager.getActiveNetworkInfo();
         //3: If there is network, fetch the data:
         if (networkInfo != null && networkInfo.isConnected()) {
-            //4: Create LoaderManager (to interact witb loaders:
+            //4: Create LoaderManager (to interact with loaders):
             LoaderManager loaderManager = getLoaderManager();
             //5: Initialize the loader; Pass ID, null for Bundle, and this activity:
             loaderManager.initLoader(LOADER_ID, null, this);
@@ -91,7 +91,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                connManager.getActiveNetworkInfo();
+                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                NetworkInfo networkInfo = (NetworkInfo) connManager.getActiveNetworkInfo();
+
                 if (networkInfo != null && networkInfo.isConnected()) {
                     loadingIndicator.setVisibility(View.VISIBLE);
                     bookListView.setVisibility(View.INVISIBLE);
