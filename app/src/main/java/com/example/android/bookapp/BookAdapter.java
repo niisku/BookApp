@@ -3,6 +3,7 @@ package com.example.android.bookapp;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,8 @@ public class BookAdapter extends ArrayAdapter<BookDetails> {
         languageTextView.setText(currentBook.getmLanguage());
 
         TextView snippetTextView = (TextView) listItemView.findViewById(R.id.result_snippet_textview);
-        snippetTextView.setText(currentBook.getmSnippet());
+        snippetTextView.setText(Html.fromHtml(currentBook.getmSnippet()));
+       // snippetTextView.setText(currentBook.getmSnippet());
 
         //Here returning the view with correct information on it:
         return listItemView;

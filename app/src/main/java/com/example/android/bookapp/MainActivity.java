@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         //Checking the state of the internet connection with ConnectivityManager:
         //1: Make a new Conn.Manager:
-        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        final ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         //2: Get information about current network:
         final NetworkInfo networkInfo = (NetworkInfo) connManager.getActiveNetworkInfo();
         //3: If there is network, fetch the data:
@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (networkInfo.isConnected()) {
+
+                connManager.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isConnected()) {
                     loadingIndicator.setVisibility(View.VISIBLE);
                     bookListView.setVisibility(View.INVISIBLE);
                     mEmptyTextView.setVisibility(View.GONE);

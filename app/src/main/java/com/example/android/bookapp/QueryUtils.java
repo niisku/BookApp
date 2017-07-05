@@ -56,54 +56,56 @@ public class QueryUtils {
             //Naming a jsonObject
             JSONObject jsonBookObject = new JSONObject(bookJson);
 
-            //Naming the going-to-be-opened ArrayList branch of 'items'
-            JSONArray itemsArray = jsonBookObject.getJSONArray("items");
+            //Checking that the object has the 'items' branch:
+            if (jsonBookObject.has("items")) {
+                //Naming the going-to-be-opened ArrayList branch of 'items'
+                JSONArray itemsArray = jsonBookObject.getJSONArray("items");
+
+                //'Looping' as long as there are numbers (items) left in the list
+                for (int i = 0; 1 < itemsArray.length(); i++) {
+
+                    //Finding + naming the current book in question:
+                    JSONObject currentBookObject = itemsArray.getJSONObject(i);
+
+                    //..And to the next branch, 'volumeInfo';
+                    JSONObject volumeInfo = currentBookObject.getJSONObject("volumeInfo");
+
+                    //Looked Title can be found here:
+                    titleValue = volumeInfo.getString("title");
 
 
-            //'Looping' as long as there are numbers (items) left in the list
-            for (int i = 0; 1 < itemsArray.length(); i++) {
-
-                //Finding + naming the current book in question:
-                JSONObject currentBookObject = itemsArray.getJSONObject(i);
-
-                //..And to the next branch, 'volumeInfo';
-                JSONObject volumeInfo = currentBookObject.getJSONObject("volumeInfo");
-
-                //Looked Title can be found here:
-                titleValue = volumeInfo.getString("title");
-
-
-                if (volumeInfo.has("authors")) {
-                    JSONArray authors = volumeInfo.getJSONArray("authors");
-                    authorValue = authors.getString(0);
-                } else {
-                    authorValue = "Author information unavailable";
-                }
-
-
-                if (currentBookObject.has("searchInfo")) {
-                    JSONObject searchInfo = currentBookObject.getJSONObject("searchInfo");
-                    if (searchInfo.has("textSnippet")) {
-                        snippetValue = searchInfo.getString("textSnippet");
+                    if (volumeInfo.has("authors")) {
+                        JSONArray authors = volumeInfo.getJSONArray("authors");
+                        authorValue = authors.getString(0);
+                    } else {
+                        authorValue = "Author information unavailable";
                     }
-                }else {
-                    snippetValue = "Text snippet unavailable";
+
+
+                    if (currentBookObject.has("searchInfo")) {
+                        JSONObject searchInfo = currentBookObject.getJSONObject("searchInfo");
+                        if (searchInfo.has("textSnippet")) {
+                            snippetValue = searchInfo.getString("textSnippet");
+                        }
+                    } else {
+                        snippetValue = "Text snippet unavailable";
+                    }
+
+
+                    //To get the language value +  if the Language doesn't exist set placeholder text:
+                    if (volumeInfo.has("language")) {
+                        languageValue = volumeInfo.getString("language");
+                    } else {
+                        languageValue = "N/A";
+                    }
+
+                    //Create a new Book object from those collected values:
+                    BookDetails book = new BookDetails(authorValue, titleValue, languageValue, snippetValue);
+
+                    //Aaaand adding the created book to the created list:
+                    jsonBookList.add(book);
+
                 }
-
-
-                //To get the language value +  if the Language doesn't exist set placeholder text:
-                if (volumeInfo.has("language")) {
-                    languageValue = volumeInfo.getString("language");
-                } else {
-                    languageValue = "N/A";
-                }
-
-                //Create a new Book object from those collected values:
-                BookDetails book = new BookDetails(authorValue, titleValue, languageValue, snippetValue);
-
-                //Aaaand adding the created book to the created list:
-                jsonBookList.add(book);
-
             }
 
         } catch (JSONException e) {
@@ -115,6 +117,7 @@ public class QueryUtils {
     }
 
     //This makes a new URL object called 'url' (btw its value will be the one in 'stringURL'):
+
     private static URL createUrl(String stringURL) {
 
         //First it will be 'null':
