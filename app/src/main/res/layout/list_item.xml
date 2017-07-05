@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bookpage_2_small"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/result_author_textview"
+                style="@style/listItem_small"
+                android:text="@string/placeholder_for_the_author"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/result_title_textview"
+                style="@style/listItem_small"
+                android:text="@string/placeholder_for_title_of_the_book" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/result_language_textview"
+            style="@style/listItem_round"
+            android:background="@drawable/circle_background"
+            android:text="@string/placeholder_language"
+            android:textColor="@color/roundTextColor" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/result_snippet_textview"
+        style="@style/listItem_large"
+        android:layout_marginTop="10dp"
+        android:text="@string/placeholder_for_snippet" />
+
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BookApp</string>
+    <string name="no_results">No results to show; \nUse the Search function above.</string>
+    <string name="no_internet">No internet connection.</string>
+    <string name="search_hint">Type Your Search Here</string>
+    <string name="placeholder_for_the_author">Placeholder for the Author</string>
+    <string name="placeholder_for_title_of_the_book">Placeholder for Title of the Book</string>
+    <string name="placeholder_language">Placeholder for language</string>
+    <string name="placeholder_for_snippet">Placeholder for snippet</string>
+</resources>
